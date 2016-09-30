@@ -15,7 +15,7 @@ tracking time spent procrastinating and
 helping to limit it.
 
 ## Vision Statement ##
-You are in control of your life and your time. -- one minute at a time.
+Helping every person manage their schedule, one second at a time.
 
 ## Motivation ##
 As college students, time management needs to be a major focus for us. However, distractions can take over when working on either our personal computers or phones. Our app aims to help track this wasted time and help the user better manage their time.
