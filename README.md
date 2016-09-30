@@ -1,2 +1,50 @@
 # rmp
-Remove my procrastination.
+### (Remove my procrastination) ###
+
+## Team Members ##
+- Adam Tammariello
+- Akash Gaonkar
+- Byron Becker
+- Joseph Jennings
+- Luis Rodriguez
+- Nurin Syukrina Mustapha Kamal
+
+## Description ##
+A time management application focusing on
+tracking time spent procrastinating and
+helping to limit it.
+
+## Vision Statement ##
+You are in control of your life and your time. -- one minute at a time.
+
+## Motivation ##
+As college students, time management needs to be a major focus for us. However, distractions can take over when working on either our personal computers or phones. Our app aims to help track this wasted time and help the user better manage their time.
+
+This application could easily apply to personal and educational/business environments.
+
+## Risks ##
+- Getting website time use data
+- Figuring out how to decipher if procrastinating or not on
+  websites
+- Syncing different platforms, ios, android, windows, osx, linux
+- Displaying graphical data from database
+- Touch integration with mobile
+- Mobile dev in general
+
+## Risk Mitigation Plan ##
+- Start early to become familiar with new languages / tools
+- Designate 2 people to more difficult tasks to move them along
+  quicker (maybe pair program?)
+- Decide for the application to be based in one or two platforms
+
+## Version Control ##
+  Github.
+
+## Software Development Methodology ##
+We are planning to follow a waterfall approach with some iterations in the beginning, and on implementing several
+scrum sprints during the development process. The iterations in the beginning will help to solidify our application, and the
+iterations throughout will help us adjust features to/from the scrum process as needed in the development phase.
+
+## Collaboration Tools ##
+- Slack
+- Google Drive
