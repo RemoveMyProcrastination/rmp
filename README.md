@@ -4,7 +4,7 @@
 ## Deadlines ##
 
 ## Team Members + Roles ##
-- Adam Tammariello:
+- Adam Tammariello: undecided 
 - Akash Gaonkar:
 - Byron Becker:
 - Joseph Jennings:
