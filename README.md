@@ -42,7 +42,7 @@ This application could easily apply to personal and educational/business environ
 
 ## Software Development Methodology ##
 We are planning to follow a waterfall approach with some iterations in the beginning, and on implementing several
-scrum sprints during the development process. The iterations in the beginning will help to solidify our application, and the
+scrum sprints during the development process. The iterations in the beginning will help to solidify our application framework, and the
 iterations throughout will help us adjust features to/from the scrum process as needed in the development phase.
 
 ## Collaboration Tools ##
