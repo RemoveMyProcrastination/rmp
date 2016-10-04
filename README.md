@@ -48,3 +48,15 @@ iterations throughout will help us adjust features to/from the scrum process as 
 ## Collaboration Tools ##
 - Slack
 - Google Drive
+
+## Tasks/Roles ##
+Adam - 
+Akash - 
+Byron - 
+Joby - 
+Luis - 
+Nurin - 
+
+## Deadlines ##
+
+
