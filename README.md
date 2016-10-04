@@ -48,3 +48,15 @@ iterations throughout will help us adjust features to/from the scrum process as 
 ## Collaboration Tools ##
 - Slack
 - Google Drive
+
+## Developers: Getting Started ##
+1. Fork this project by pressing the "Fork" button on the Github.
+2. Clone your fork of the repo (not the original) onto your machine.
+3. Add this (the original) repo to your local repo as a remote called "upstream".
+4. Before you push, be sure to pull from upstream to get the latest changes.
+5. Push your changes to origin, **not upstream**.
+6. To share your changes with everyone, create a pull request from your fork on Github.
+7. Thumbs up other people's pull requests to show they're okay to merge with this fork.
+
+
+
