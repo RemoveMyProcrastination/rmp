@@ -7,7 +7,7 @@
 - Adam Tammariello:
 - Akash Gaonkar:
 - Byron Becker:
-- Joseph Jennings:
+- Joseph Jennings: Android Dev
 - Luis Rodriguez:
 - Nurin Syukrina Mustapha Kamal:
 
