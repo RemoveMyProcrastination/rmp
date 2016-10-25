@@ -59,4 +59,4 @@ iterations throughout will help us adjust features to/from the scrum process as 
 5. Push your changes to origin, **not upstream**.
 6. To share your changes with everyone, create a pull request from your fork on Github.
 7. Thumbs up other people's pull requests to show they're okay to merge with this fork.
-
+8. Great!
