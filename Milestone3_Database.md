@@ -1,6 +1,6 @@
-### Milestone3_Database ###
+## Milestone3_Database ##
 
-## CouchDB ##
+### CouchDB ###
 
 For our project we are using CouchDB(NoSQL) as the database and are using python and flask to create the api that will interact with CouchDB and the android client. 
 The database is located on an ubuntu server set up using Amazon Web Services. 
