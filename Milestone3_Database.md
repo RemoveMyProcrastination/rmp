@@ -10,4 +10,4 @@ We currently have 6 documents in the database, which are titled by user name. Ea
 Below is a screenshot of all of the documents in our user_data database, as well as a close up of the data in some of the specific document users.
 
 
-![ScreenShot](https://raw.github.com/{ByronBecker}/{rmp}/{origin}/{Screen Shot 2016-10-31 at 3.05.02 PM.png})
+![ScreenShot](https://raw.github.com/ByronBecker/rmp/Screen Shot 2016-10-31 at 3.05.02 PM.png)
