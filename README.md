@@ -4,12 +4,12 @@
 ## Deadlines ##
 
 ## Team Members + Roles ##
-- Adam Tammariello: undecided 
-- Akash Gaonkar:
-- Byron Becker:
-- Joseph Jennings: Android Dev
-- Luis Rodriguez:
-- Nurin Syukrina Mustapha Kamal:
+- Adam Tammariello: Database 
+- Akash Gaonkar: Data Usage 
+- Byron Becker: Database
+- Joseph Jennings: Data Usage 
+- Luis Rodriguez: UX/UI 
+- Nurin Syukrina Mustapha Kamal: UX/UI
 
 ## Description ##
 A time management application focusing on
