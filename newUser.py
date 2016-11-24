@@ -5,17 +5,21 @@ import couchdb, json, datetime
 app = Flask(__name__)
 
 ''' *** List of accessible api urls ***
+
+***NOTE: until Akash finishes user authentication/security, <string:id> will be the name of the user
+
+
 1. '/' is a get request that tests accessibility to the flask server
-2. '/view/' is a get request that returns all the documents (with _id = 'username') in the database
-3. '/get/<string:name>/' is a get request that returns all of the information in the database corresponding to a specific name user including goals, _id, _rev, etc.
-4. '/getapps/<string:name>/' is a get request that returns only the application data dictionary
-5. '/newuser/<string:name>/' is a put request that creates a new user
-6. '/app/<string:name>/<string:app>' is open to both PUT and DELETE requests
+2. '/view/' is a get request that returns all the documents (with _id = 'id') in the database
+3. '/get/<string:userid>/' is a get request that returns all of the information in the database corresponding to a specific userid user including goals, _id, _rev, etc.
+4. '/getapps/<string:userid>/' is a get request that returns only the application data dictionary
+5. '/newuser/<string:userid>/' is a put request that creates a new user
+6. '/app/<string:userid>/<string:app>' is open to both PUT and DELETE requests
     a. the PUT request places that app in the database if not already present, otherwise does nothing to prevent overriding data that may exist
     b. the DELETE request removes the app from the database if present
-7. '/getgoal/<string:name>/' is a get request that retrieves the Daily and Weekly Goals from the server
-8. '/newgoal/<string:name>/<int:daily>/<int:weekly>/' is a put requests that can be used to set new goals
-9. '/usage/<string:name>/' is a put request that takes in json usage data and if that app does not yet exist, creates it in the database, and then updates the current day to reflect the json usage data sent by the put request
+7. '/getgoal/<string:userid>/' is a get request that retrieves the Daily and Weekly Goals from the server
+8. '/newgoal/<string:userid>/<int:daily>/<int:weekly>/' is a put requests that can be used to set new goals
+9. '/usage/<string:userid>/' is a put request that takes in json usage data and if that app does not yet exist, creates it in the database, and then updates the current day to reflect the json usage data sent by the put request
 
 
 Database Structure - refer to indents as higherarchy
@@ -23,7 +27,7 @@ Database Structure - refer to indents as higherarchy
 ** Inside each document is a dictionary of dictionaries. **
     
 Couchdb Server
-    -> database name
+    -> database userid
         -> user titled documents within database
             -> _id
             -> _rev
@@ -74,83 +78,83 @@ def welcome():
 def getDocs():
     return json.dumps(db.get('_all_docs')) + "\n"
 
-@app.route('/get/<string:name>/', methods = ['GET'])
-#curl -X GET http://localhost:5000/get/<name>    
+@app.route('/get/<string:userid>/', methods = ['GET'])
+#curl -X GET http://localhost:5000/get/<userid>/ 
 
-def getName(name):
-    if name in db:
-        return json.dumps(db.get(name)) + "\n"
+def getName(userid):
+    if userid in db:
+        return json.dumps(db.get(userid)) + "\n"
     else:
         return "User not in database"
 
-@app.route('/getapps/<string:name>/', methods = ['GET'])
-#curl -X GET http://localhost:5000/get/<name>    
+@app.route('/getapps/<string:userid>/', methods = ['GET'])
+#curl -X GET http://localhost:5000/get/<userid>/    
 
-def getApps(name):
-    if name in db:
-        return json.dumps(db.get(name)['Appdata']) + "\n"
+def getApps(userid):
+    if userid in db:
+        return json.dumps(db.get(userid)['Appdata']) + "\n"
     else:
         return "User not in database"
 
-@app.route('/newuser/<string:name>/', methods = ['PUT'])
-#curl -X PUT http://localhost:5000/newuser/<name>    
+@app.route('/newuser/<string:userid>/', methods = ['PUT'])
+#curl -X PUT http://localhost:5000/newuser/<userid>/    
 
-def newUser(name):
-    if name in db:
-        return name + " already in db!" + "\n"
-    db[name] = {'name': name, 'Appdata': {'Total': Weekly}, 'Goals': Goals}
-    if name in db:
-        return "Successfully inserted " + name + "\n"
+def newUser(userid):
+    if userid in db:
+        return userid + " already in db!" + "\n"
+    db[userid] = {'userid': userid, 'Appdata': {'Total': Weekly}, 'Goals': Goals}
+    if userid in db:
+        return "Successfully inserted " + userid + "\n"
     else:
         return "Failed to insert"
     
 
-@app.route('/app/<string:name>/<string:app>/', methods = ['PUT','DELETE'])
+@app.route('/app/<string:userid>/<string:app>/', methods = ['PUT','DELETE'])
 
-def App(name,app): 
-    doc = db.get(name)
+def App(userid,app): 
+    doc = db.get(userid)
     if request.method == "PUT":
-        #curl -X PUT http://localhost:5000/app/<name>/<app>/    
+        #curl -X PUT http://localhost:5000/app/<userid>/<app>/    
         if app in doc['Appdata']:
             return app + " already in Appdata" + "\n"
         else:
             doc['Appdata'][app] = Weekly
-            db[name] = doc
+            db[userid] = doc
             return "Successfully inserted " + app + "\n" 
     elif request.method == "DELETE":
-        #curl -X DELETE http://localhost:5000/app/<name>/<app>/ 
+        #curl -X DELETE http://localhost:5000/app/<userid>/<app>/ 
         if app in doc['Appdata']:
             del doc['Appdata'][app]
-            db[name] = doc
+            db[userid] = doc
             return "Successfully deleted " + app + "\n"
         else:
             return app + " not in Appdata" + "\n"
 
-@app.route('/getgoal/<string:name>/', methods = ['GET'])
-#curl -X GET http://localhost:5000/getgoal/<name>/ 
+@app.route('/getgoal/<string:userid>/', methods = ['GET'])
+#curl -X GET http://localhost:5000/getgoal/<userid>/ 
 
-def getGoal(name):
-    doc = db.get(name)
+def getGoal(userid):
+    doc = db.get(userid)
     return "Daily Goal is : " + str(doc['Goals']['Daily']) + "\n" + "Weekly Goal is : " + str(doc['Goals']['Weekly']) + "\n"
 
-@app.route('/newgoal/<string:name>/<int:daily>/<int:weekly>/', methods = ['PUT'])
-#curl -X PUT http://localhost:5000/newgoal/<name>/<daily>/<weekly>/ 
+@app.route('/newgoal/<string:userid>/<int:daily>/<int:weekly>/', methods = ['PUT'])
+#curl -X PUT http://localhost:5000/newgoal/<userid>/<daily>/<weekly>/ 
 
-def newGoal(name,daily,weekly):
-    doc = db.get(name)
+def newGoal(userid,daily,weekly):
+    doc = db.get(userid)
     doc['Goals']['Daily'] = daily 
     doc['Goals']['Weekly'] = weekly
-    db[name] = doc
+    db[userid] = doc
     return "New Daily is: " + str(daily) + "\n" + "New Weekly is: " + str(weekly) + "\n"
     
-@app.route('/compare/<string:name>/', methods = ['GET'])    
-#curl -X GET http://localhost:5000/compare/<name>
+@app.route('/compare/<string:userid>/', methods = ['GET'])    
+#curl -X GET http://localhost:5000/compare/<userid>
 
-def checker(name):
+def checker(userid):
     #https://www.tutorialspoint.com/python/time_strftime.htm
     now = datetime.datetime.now()
     day = now.strftime("%a")      #gives current day of week abbrev
-    doc = db.get(name)
+    doc = db.get(userid)
     data = doc['Appdata']['Total']
     w_excess = data['Tot'] - doc['Goals']['Weekly']
     today_index = dayToIndex(day)
@@ -168,23 +172,24 @@ def checker(name):
         "Weekly Time = " + str(data['Tot']) + "\n" + \
         "No goals exceeded! Good job not procrastinating!" + "\n"
 
-@app.route('/usage/<string:name>/', methods = ['PUT'])      
+@app.route('/usage/<string:userid>/', methods = ['PUT'])      
 # curl -H "Content-type: application/json" -X PUT http://127.0.0.1:5000/usage/Byron/ -d '{"Instagram": 5}'
 
-def takeJson(name):
+def takeJson(userid):
     now = datetime.datetime.now()
     day = now.strftime("%a")            #gives current day of week abbrev
     today_index = dayToIndex(day)       #converts to day of week as referenced in the database
-    doc = db.get(name)  
+    doc = db.get(userid)  
     jdata = json.loads(request.data)    #converts the incoming json request to a json dictionary
     
     for app in jdata:       
         if app not in doc:              #if not in 'Appdata', then insert the app by calling the App function before updating usage in database 
-            App(name,app)
+            App(userid,app)
+            doc = db.get(userid)        #have to update doc in this case 
         index =  str(app)
         doc['Appdata'][index][today_index] = jdata[index] 
 
-    db[name] = doc
+    db[userid] = doc
 
     return "Hello " + str(jdata) + "\n"     #confimation that the json data was received
     
