@@ -48,7 +48,11 @@ Couchdb Server
 '''
 
 server = couchdb.Server()
-db = server['test']
+dbname = 'test'
+
+db = server[dbname] if dbname in server else server.create(dbname)
+
+
 headers = {'Content-Type': 'application/json'}
 Weekly = {'S': 0, 'M': 0, 'T': 0, 'W': 0, 'R': 0, 'F': 0, 'Sa': 0, 'Tot': 0} 
 #Weekly Time holders for each app
