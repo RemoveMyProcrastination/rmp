@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">DemoGetOpenApp</string>
+    <string name="title_activity_main">Demo of Get Open App</string>
+
+    <string name="app_explanation">A demo showing how to get the currently open app in the background. Check system out to see logs.</string>
+
+    <string name="log_open_app_button">Log Open App</string>
+    <string name="loop_log_button">Loop Log</string>
+
+</resources>
