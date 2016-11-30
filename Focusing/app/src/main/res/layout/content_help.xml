@@ -23,4 +23,14 @@
         android:textSize="25sp"
         android:id="@+id/textView2" />
 
+    <TextView
+        android:text="@string/help_string"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:id="@+id/textView8" />
+
 </RelativeLayout>

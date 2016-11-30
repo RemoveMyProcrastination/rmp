@@ -11,8 +11,11 @@
     <string name="settings">Settings</string>
     <string name="about_string">
 
-    "We are time management application focussing on tracking time spent
-    procrastinating and helping to limit it"
+    "We are time management application focussing on tracking time spent procrastinating and helping to limit it"
+
+    </string>
+    <string name="help_string">
+    "For help with any technical issues please call us at 1800-FOCUS or email us at rmp_focus@gmail.com"
 
     </string>
     <string name="intro_quote">
@@ -28,6 +31,10 @@
     <string name="title_activity_help">Help</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_sub_profile">SubProfile</string>
-
+    <string name="daily_usage">Daily Goals</string>
+    <string name="weekly_usage">Weekly Goals</string>
     <string name="profile_username">Username:</string>
+    <string name="profile_pass">Password:</string>
+    <string name="title_activity_daily_goals">DailyGoals</string>
+    <string name="title_activity_weekly_goals">WeeklyGoals</string>
 </resources>

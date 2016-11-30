@@ -14,13 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Settings extends AppCompatActivity
+public class DailyGoals extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_daily_goals);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -73,23 +73,23 @@ public class Settings extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_timelapse) {
-            Intent intent = new Intent(Settings.this, Home.class);
+            Intent intent = new Intent(DailyGoals.this, Home.class);
             startActivity(intent);
             // Handle the camera action
         } else if (id == R.id.nav_faces) {
-            Intent intent = new Intent(Settings.this, ProfileActivity.class);
+            Intent intent = new Intent(DailyGoals.this, ProfileActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_person) {
-            Intent intent = new Intent(Settings.this, AboutUs.class);
+            Intent intent = new Intent(DailyGoals.this, AboutUs.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_manage) {
-            Intent intent = new Intent(Settings.this, Settings.class);
+            Intent intent = new Intent(DailyGoals.this, Settings.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_help) {
-            Intent intent = new Intent(Settings.this, Help.class);
+            Intent intent = new Intent(DailyGoals.this, Help.class);
             startActivity(intent);
 
         }
@@ -97,17 +97,5 @@ public class Settings extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void GoDaily(View view)
-    {
-        Intent intent = new Intent(Settings.this, DailyGoals.class);
-        startActivity(intent);
-    }
-
-    public void GoWeekly(View view)
-    {
-        Intent intent = new Intent(Settings.this, WeeklyGoals.class);
-        startActivity(intent);
     }
 }

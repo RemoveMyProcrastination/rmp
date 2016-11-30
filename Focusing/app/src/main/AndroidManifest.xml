@@ -41,6 +41,14 @@
         <activity
             android:name=".SubProfile"
             android:label="@string/app_title"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DailyGoals"
+            android:label="@string/app_title"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".WeeklyGoals"
+            android:label="@string/app_title"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

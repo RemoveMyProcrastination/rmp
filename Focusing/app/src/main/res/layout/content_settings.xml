@@ -28,7 +28,7 @@
         android:layout_width="300dp"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/switch3"
         android:layout_below="@+id/textView2" />
 
@@ -37,7 +37,7 @@
         android:layout_width="300dp"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/switch4"
         android:layout_below="@+id/textView2" />
 
@@ -46,7 +46,7 @@
         android:layout_width="300dp"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="70dp"
         android:id="@+id/switch5"
         android:layout_below="@+id/textView2" />
 
@@ -55,7 +55,7 @@
         android:layout_width="300dp"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="90dp"
         android:id="@+id/switch6"
         android:layout_below="@+id/textView2" />
 
@@ -64,7 +64,7 @@
         android:layout_width="300dp"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="110dp"
         android:id="@+id/switch7"
         android:layout_below="@+id/textView2" />
 
@@ -73,7 +73,7 @@
         android:layout_width="300dp"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="130dp"
         android:id="@+id/switch8"
         android:layout_below="@+id/textView2" />
 
@@ -82,7 +82,7 @@
         android:layout_width="300dp"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="150dp"
         android:id="@+id/switch9"
         android:layout_below="@+id/textView2" />
 
@@ -91,17 +91,30 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/roundbutton"
         android:layout_below="@+id/switch9"
         android:layout_marginTop="60dp"
-        android:id="@+id/button1" />
+        android:id="@+id/button1"
+        android:onClick="GoDaily" />
 
     <Button
         android:text="Set Weekely Goals"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/roundbutton"
         android:layout_below="@+id/switch9"
         android:layout_marginTop="120dp"
-        android:id="@+id/button2" />
+        android:id="@+id/button2"
+        android:onClick="GoWeekly" />
+
+    <TextView
+        android:text="Aplications you wish to monitor:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/textView9" />
 
 </RelativeLayout>
