@@ -4,7 +4,7 @@
 
     newUser.py
     author: Byron Becker
-    author: Akash Gaonkar
+    author: Akash Gaonkar -- added user authentication
 
     Creates and runs the flask server.
 
@@ -17,7 +17,6 @@ from flask import Flask, request
 import globalopts
 from auth import require_auth_header
 from user import blueprint_user
-from util import print_and_flush
 
 app = Flask(__name__)
 app.register_blueprint(blueprint_user, url_prefix="/user")
@@ -34,9 +33,9 @@ app.register_blueprint(blueprint_user, url_prefix="/user")
 3. '/get/' is a get request that returns all of the information
     in the database corresponding to a specific user user including goals,
     _id, _rev, etc.
-4. '/getapps/' is a get request that returns only the
+4. '/apps/' is a get request that returns only the
     application data dictionary
-5. '/newuser/' is a put request that creates a new user
+5. '/user/' is a put request that creates a new user
 6. '/app/<string:app>' is open to both PUT and DELETE requests
     a. the PUT request places that app in the database if not already present,
        otherwise does nothing to prevent overriding data that may exist
@@ -54,7 +53,7 @@ Database Structure - refer to indents as higherarchy
 
 ** Inside each document is a dictionary of dictionaries. **
 
-DB Server
+globalopts.appdata Server
     -> database user
         -> user titled documents within database
             -> _id
@@ -76,20 +75,6 @@ DB Server
 '''
 
 
-def dayToIndex(day):
-    switcher = {
-        'Mon': 'M',
-        'Tue': 'T',
-        'Wed': 'W',
-        'Thu': 'R',
-        'Fri': 'F',
-        'Sat': 'Sa',
-        'Sun': 'S'
-    }
-
-    return switcher.get(day, "nothing")
-
-
 @app.route('/')
 def welcome():
     return "Welcome to Focus" + "\n"
@@ -105,15 +90,20 @@ def getDocs():
 @app.route('/get/', methods=['GET'])
 @require_auth_header
 def getName():
-    print_and_flush(globalopts.appdata[request.user])
-    return json.dumps(globalopts.appdata.get(request.user))
+    doc = globalopts.appdata[request.user]
+    doc['Appdata'] = appTotal(doc['Appdata'])
+    globalopts.appdata[request.user] = doc
+    return json.dumps(globalopts.appdata[request.user])
 
 
-# curl -X GET -H "Authorization: <auth_token>" http://localhost:5000/get/
-@app.route('/getapps/', methods=['GET'])
+# curl -X GET -H "Authorization: <auth_token>" http://localhost:5000/apps/
+@app.route('/apps/', methods=['GET'])
 @require_auth_header
-def getApps(user):
-    return json.dumps(globalopts.appdata.get(request.user)['appdata'])
+def getApps():
+    doc = globalopts.appdata[request.user]
+    doc['Appdata'] = appTotal(doc['Appdata'])
+    globalopts.appdata[request.user] = doc
+    return json.dumps(globalopts.appdata[request.user]['Appdata'])
 
 
 # curl -X PUT -H "Authorization: <auth_token>" http://localhost:5000/app/<app>/
@@ -218,6 +208,43 @@ def updateUsage():
 
     # confimation that the json data was received
     return "Hello " + str(jdata) + "\n"
+
+
+def dayToIndex(day):
+    switcher = {
+        'Mon': 'M',
+        'Tue': 'T',
+        'Wed': 'W',
+        'Thu': 'R',
+        'Fri': 'F',
+        'Sat': 'Sa',
+        'Sun': 'S'
+    }
+
+    return switcher.get(day, "nothing")
+
+
+def appTotal(appdata):
+    for app, data in appdata.items():
+        if app != 'Total':
+            total = 0
+            for day, hours in data.items():
+                if day != 'Tot':
+                    # updates the total usage in each respective App dictionary
+                    total += hours
+            data['Tot'] = total  # updates total for that app
+
+    weekly = 0
+    for day in globalopts.DEFAULT_WEEKLY_TIMES:
+        if day != 'Tot':
+            today = 0
+            for app, data in appdata.items():
+                if day != 'Tot':
+                    today += data[day]
+            appdata['Total'][day] = today  # updates total for the day
+            weekly += today
+    appdata['Total']['Tot'] = weekly  # updates weekly total
+    return appdata
 
 
 if __name__ == '__main__':
