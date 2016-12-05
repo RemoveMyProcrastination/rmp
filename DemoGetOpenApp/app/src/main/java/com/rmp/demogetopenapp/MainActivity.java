@@ -1,6 +1,7 @@
 package com.rmp.demogetopenapp;
 
 import android.app.AlarmManager;
+import android.app.AppOpsManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -11,18 +12,27 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import static android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS;
+
 public class MainActivity extends AppCompatActivity {
 
-    public static final long LOOP_WAIT_MILLIS = 1000 * 10;
+    public static long LOOP_WAIT_MILLIS = 1000 * 600;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Check if permission is already set. If not take user to settings
+        AppOpsManager appOps = (AppOpsManager) this.getSystemService(Context.APP_OPS_SERVICE);
+        int mode = appOps.checkOpNoThrow("android:get_usage_stats", android.os.Process.myUid(), this.getPackageName());
+        boolean granted = mode == AppOpsManager.MODE_ALLOWED;
+        if( granted == false) {
+            Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+            startActivity(intent);
+        }
 
-        //Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-        //startActivity(intent);
+
 
 
         Switch looper = (Switch) findViewById(R.id.loopLogButton);
@@ -40,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, LogOpenApp.class);
         startService(i);
     }
+
 
     protected void toggleLoopLogging(View v, boolean loop) {
 
