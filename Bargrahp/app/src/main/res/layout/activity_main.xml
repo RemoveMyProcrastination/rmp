@@ -16,4 +16,10 @@
         android:id="@+id/testGraph"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"></com.github.mikephil.charting.charts.BarChart>
+    <com.github.mikephil.charting.charts.HorizontalBarChart
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:id="@+id/weekGraph"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"></com.github.mikephil.charting.charts.HorizontalBarChart>
 </RelativeLayout>
