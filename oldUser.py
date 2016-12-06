@@ -52,6 +52,8 @@ db = server['test']
 headers = {'Content-Type': 'application/json'}
 Weekly = {'S': 0, 'M': 0, 'T': 0, 'W': 0, 'R': 0, 'F': 0, 'Sa': 0, 'Tot': 0} 
 #Weekly Time holders for each app
+weeksort = ['S', 'M', 'T', 'W', 'R', 'F', 'Sa', 'Tot']
+#formats order for weekly graph
 Goals = {'Daily': 24, 'Weekly': 150}    
 #make goals unreachable so notifications have to be set first
 
@@ -71,25 +73,30 @@ def dayToIndex(day):
 def appTotal(Appdata):    
 
     for app, data in Appdata.items():
-        print(data)
+        #print(data)
         total = 0
         if app != 'Total':
             for day, hours in data.items():
-                print(hours)
+                #print(hours)
                 if day != 'Tot':        #updates the total usage in each respective App dictionary
                     total += int(hours)
             data['Tot'] = total         #updates total for that app
 
     weekly = 0
+
     for day in Weekly:
         today = 0 
         if day != 'Tot':
             for app, data in Appdata.items():
-                if day != 'Tot':
+                if app != 'Total':
                     today += data[day]
+                print(str(today) + " " + str(day))
             Appdata['Total'][day] = today      #updates total for the day  
             weekly += today             
+        print(str(weekly) + " weekly")
+    print(str(weekly) + " last weekly")
     Appdata['Total']['Tot'] = weekly        #updates weekly total
+
     return Appdata 
 
 @app.route('/')
@@ -182,6 +189,7 @@ def newGoal(userid,daily,weekly):
 #The following 2 functions, which were just implemented return the daily and weekly lists that will be used for their corresponding graph inputs 
 
 def dailyGraph(userid):
+#curl -X GET http://localhost:5000/dgraph/<userid>/
 
     now = datetime.datetime.now()
     day = now.strftime("%a")
@@ -198,25 +206,22 @@ def dailyGraph(userid):
     dailylist.append((doc['Goals']['Daily'], "Goal"))
     #print (dailylist)
 
-    return str(dailylist) + "\n"
+    return json.dumps(dailylist) + "\n"
 
+@app.route('/wgraph/<string:userid>/', methods = ['GET'])
 
 def weeklyGraph(userid):
+#curl -X GET http://localhost:5000/wgraph/<userid>/
 
+    doc = db.get(userid)
     weeklylist = []
-    for day in Weekly:
-        if day != "Tot":
-            weeklylist.append((doc['Appdata']['Total'][day]))
-    weeklylist = sorted(weeklylist)
-    weeklylist.append((doc['Appdata']['Total']['Tot'], "Total"))
+    for day in weeksort:
+        weeklylist.append((doc['Appdata']['Total'][day], day))
     weeklylist.append((doc['Goals']['Weekly'], "Goal"))
 
-    return str(weeklylist) + "\n"
-    
-    
+    return json.dumps(weeklylist) + "\n"
 
-
-app.route('/compare/<string:userid>/', methods = ['GET'])    
+@app.route('/compare/<string:userid>/', methods = ['GET'])    
 #curl -X GET http://localhost:5000/compare/<userid>
 
 def checker(userid):
@@ -256,12 +261,23 @@ def takeJson(userid):
             App(userid,app)
             doc = db.get(userid)        #have to update doc in this case 
         index =  str(app)
-        doc['Appdata'][index][today_index] = jdata[index] 
+        doc['Appdata'][index][today_index] = round(jdata[index]/float(60), 2) 
 
 
     db[userid] = doc
 
     return "Hello " + str(jdata) + "\n"     #confimation that the json data was received
+
+@app.route('/clear/<string:userid>/', methods = ['PUT'])
+
+def clearData(userid):
+    doc = db.get(userid)
+    for app, data in doc['Appdata'].items():        #algorithm runs in 8 * (number of apps + 1) time
+        for day in data:
+            data[day] = 0
+    print(doc)
+    db[userid] = doc 
+    return json.dumps(doc)
     
 
 if __name__ == '__main__':
