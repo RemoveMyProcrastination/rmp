@@ -7,6 +7,4 @@
 couchdb -b
 wget -qO - --retry-connrefused http://127.0.0.1:5984/ | cat
 
-
-./newUser.py 
-
+./newUser.py
