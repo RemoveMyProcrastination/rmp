@@ -197,15 +197,17 @@ def dailyGraph(userid):
     day = now.strftime("%a")
     today = dayToIndex(day)
     doc = db.get(userid)
-    dailylist = []
+    apps = []
+    dailylist = {}
     for app in doc['Appdata']:
         if app != "Total":
             #print(app)
             
-            dailylist.append((doc['Appdata'][app][today], app))
-    dailylist = sorted(dailylist)
-    dailylist.append((doc['Appdata']['Total'][today], "Total"))
-    dailylist.append((doc['Goals']['Daily'], "Goal"))
+            apps.append((doc['Appdata'][app][today], app))
+    apps = sorted(apps)
+    dailylist["apps"] = apps
+    dailylist["total"] = ((doc['Appdata']['Total'][today], "Total"))
+    dailylist["goals"] = ((doc['Goals']['Daily'], "Goal"))
     #print (dailylist)
 
     return json.dumps(dailylist) + "\n"
@@ -216,10 +218,15 @@ def weeklyGraph(userid):
 #curl -X GET http://localhost:5000/wgraph/<userid>/
 
     doc = db.get(userid)
-    weeklylist = []
+    weeklylist = {}
+    days = []
     for day in weeksort:
-        weeklylist.append((doc['Appdata']['Total'][day], day))
-    weeklylist.append((doc['Goals']['Weekly'], "Goal"))
+        if day != 'Tot':
+            days.append((doc['Appdata']['Total'][day], day))
+
+    weeklylist["days"] = days 
+    weeklylist["total"] = ((doc['Appdata']['Total']['Tot'], "Total"))
+    weeklylist["goals"] = ((doc['Goals']['Weekly'], "Goal"))
 
     return json.dumps(weeklylist) + "\n"
 
