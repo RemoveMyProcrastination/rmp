@@ -113,4 +113,10 @@
     <string name="title_activity_setting">Setting</string>
     <string name="title_activity_help">Help</string>
     <string name="title_activity_home">Home</string>
+    <string name="logout">Logout</string>
+    <string name="intro_quote">
+        "More time, more productivity"
+    </string>
+    <string name="title_activity_sub_profile">SubProfile</string>
+    <string name="profile_username">Username:</string>
 </resources>

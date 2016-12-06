@@ -1,15 +1,8 @@
 package com.example.syukrina.focus;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,54 +11,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-
-import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    BarChart barChart;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-
-        setContentView(R.layout.activity_home_page);
-        barChart = (BarChart) findViewById(R.id.testGraph);
-        ArrayList<BarEntry> barEntries = new ArrayList<>();
-        barEntries.add(new BarEntry(44f, 0));
-        barEntries.add(new BarEntry(23f, 1));
-        barEntries.add(new BarEntry(10f, 2));
-        barEntries.add(new BarEntry(22f, 3));
-        barEntries.add(new BarEntry(50f, 4));
-        barEntries.add(new BarEntry(30f, 5));
-        barEntries.add(new BarEntry(11f, 6));
-
-        BarDataSet set = new BarDataSet(barEntries,"WeeklyUsage");
-
-        ArrayList<String> weekDays = new ArrayList<>();
-        weekDays.add("Sunday");
-        weekDays.add("Monnday");
-        weekDays.add("Tuesday");
-        weekDays.add("Wednesday");
-        weekDays.add("Thursday");
-        weekDays.add("Friday");
-        weekDays.add("Saturday");
-
-        BarData data = new BarData(set);
-        data.setBarWidth(0.9f); // set custom bar width
-        barChart.setData(data);
-        barChart.setFitBars(true); // make the x-axis fit exactly all bars
-        barChart.invalidate(); // refresh
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -77,6 +36,8 @@ public class HomePage extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        addListenerOnButton();
     }
 
     @Override
@@ -129,16 +90,16 @@ public class HomePage extends AppCompatActivity
             Intent intent = new Intent(HomePage.this, AboutActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_home) {
-            Intent intent = new Intent(HomePage.this, HomePage.class);
+        } else if (id == R.id.nav_help) {
+            Intent intent = new Intent(HomePage.this, HelpActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_manage) {
             Intent intent = new Intent(HomePage.this, SettingActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_help) {
-            Intent intent = new Intent(HomePage.this, HelpActivity.class);
+        } else if (id == R.id.nav_power) {
+            Intent intent = new Intent(HomePage.this, LoginActivity.class);
             startActivity(intent);
 
         }
@@ -148,15 +109,17 @@ public class HomePage extends AppCompatActivity
         return true;
     }
 
+    public void addListenerOnButton() {
+        final Context context = this;
 
-    public class ScrollingActivity extends AppCompatActivity {
+        button = (Button) findViewById(R.id.bWeekly);
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.app_bar_home_page);
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-        }
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, usageGraph.class);
+                startActivity(intent);
+            }
+        });
     }
 }
