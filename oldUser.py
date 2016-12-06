@@ -19,8 +19,10 @@ app = Flask(__name__)
     b. the DELETE request removes the app from the database if present
 7. '/getgoal/<string:userid>/' is a get request that retrieves the Daily and Weekly Goals from the server
 8. '/newgoal/<string:userid>/<int:daily>/<int:weekly>/' is a put requests that can be used to set new goals
-9. '/usage/<string:userid>/' is a put request that takes in json usage data and if that app does not yet exist, creates it in the database, and then updates the current day to reflect the json usage data sent by the put request
-
+9. '/dgraph/<string:userid>/' is a get request that returns data in ease to parse format for the daily graph
+10. '/wgraph/<string:userid>/' is a get request that returns data in ease to parse format for the weekly graph
+11. '/usage/<string:userid>/' is a put request that takes in json usage data and if that app does not yet exist, creates it in the database, and then updates the current day to reflect the json usage data sent by the put request
+12. '/clear/<string:userid>/' is a put request that clears all of the hourly Appdata ->> this is usually done to start a fresh week
 
 Database Structure - refer to indents as higherarchy
 
