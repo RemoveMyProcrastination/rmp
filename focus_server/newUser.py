@@ -154,6 +154,43 @@ def newGoal(daily, weekly):
     return "New daily is: " + str(daily) + "\n" + \
            "New weekly is: " + str(weekly) + "\n"
 
+@app.route('/dgraph/', methods=['GET'])
+@require_auth_header
+def dailyGraph():
+#curl -X GET http://localhost:5000/dgraph/<userid>/
+
+    now = datetime.datetime.now()
+    day = now.strftime("%a")
+    today = dayToIndex(day)
+    doc = db.get(request.user)
+    apps = []
+    dailylist = {}
+    for app in doc['Appdata']:
+        if app != "Total":
+            apps.append((doc['Appdata'][app][today], app))
+    apps = sorted(apps)
+    dailylist["apps"] = apps
+    dailylist["total"] = ((doc['Appdata']['Total'][today], "Total"))
+    dailylist["goals"] = ((doc['Goals']['Daily'], "Goal"))
+    return json.dumps(dailylist)
+
+@app.route('/wgraph/', methods=['GET'])
+@require_auth_header
+def weeklyGraph():
+#curl -X GET http://localhost:5000/wgraph/<userid>/
+
+    doc = db.get(request.user)
+    weeklylist = {}
+    days = []
+    for day in weeksort:
+        if day != 'Tot':
+            days.append((doc['Appdata']['Total'][day], day))
+
+    weeklylist["days"] = days 
+    weeklylist["total"] = ((doc['Appdata']['Total']['Tot'], "Total"))
+    weeklylist["goals"] = ((doc['Goals']['Weekly'], "Goal"))
+
+    return json.dumps(weeklylist)
 
 # curl -X -H "Authorization: <auth_token>" GET http://localhost:5000/compare
 @app.route('/compare/', methods=['GET'])
@@ -170,9 +207,9 @@ def checker():
 
     if w_excess > 0 and d_excess > 0:
         return "Weekly limit exceeded by " + str(w_excess) + "\n" + \
-               "Daily limit exceeded by " + (d_excess) + "\n"
+               "Daily limit exceeded by " + str(d_excess) + "\n"
     elif d_excess > 0:
-        return "Daily limit exceeded by " + (d_excess) + "\n"
+        return "Daily limit exceeded by " + str(d_excess) + "\n"
     elif w_excess > 0:
         return "Weekly limit exceeded by " + str(w_excess) + "\n"
     else:
@@ -209,6 +246,16 @@ def updateUsage():
     # confimation that the json data was received
     return "Hello " + str(jdata) + "\n"
 
+@app.route('/clear/', methods = ['PUT'])
+@require_auth_header
+def clearData():
+    doc = db.get(request.user)
+    for app, data in doc['Appdata'].items():        #algorithm runs in 8 * (number of apps + 1) time
+        for day in data:
+            data[day] = 0
+    db[userid] = doc 
+    return json.dumps(doc)
+
 
 def dayToIndex(day):
     switcher = {
@@ -226,8 +273,8 @@ def dayToIndex(day):
 
 def appTotal(appdata):
     for app, data in appdata.items():
+        total = 0
         if app != 'Total':
-            total = 0
             for day, hours in data.items():
                 if day != 'Tot':
                     # updates the total usage in each respective App dictionary
@@ -236,10 +283,10 @@ def appTotal(appdata):
 
     weekly = 0
     for day in globalopts.DEFAULT_WEEKLY_TIMES:
+        today = 0
         if day != 'Tot':
-            today = 0
             for app, data in appdata.items():
-                if day != 'Tot':
+                if app != 'Total':
                     today += data[day]
             appdata['Total'][day] = today  # updates total for the day
             weekly += today
