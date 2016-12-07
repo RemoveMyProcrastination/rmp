@@ -258,7 +258,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <MultiAutoCompleteTextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -270,13 +270,12 @@
         android:layout_alignParentStart="true"
         tools:hint="Daily Goal" />
 
-    <MultiAutoCompleteTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <EditText
+        android:layout_width="115dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/mTextDaily"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="17dp"
         android:id="@+id/mTextWeekly"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

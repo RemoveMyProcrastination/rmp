@@ -1,19 +1,41 @@
 package com.example.syukrina.focus;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 /**
  * Created by SYUKRINA on 12/5/2016.
  */
@@ -23,9 +45,10 @@ import java.util.ArrayList;
 public class usageGraph extends AppCompatActivity {
 
     BarChart barChart;
-    BarChart horChart;
+
     String[] values = new String[20];
     Button button;
+    LimitLine limitLine;
 
 
     @Override
@@ -34,7 +57,9 @@ public class usageGraph extends AppCompatActivity {
         setContentView(R.layout.activity_usage_graph);
 
         barChart = (BarChart) findViewById(R.id.testGraph);
-        horChart = (BarChart) findViewById(R.id.weekGraph);
+        //ArrayList<entry>dailyData = weeklyData();
+
+
         ArrayList<BarEntry> barEntries = new ArrayList<>();
 
 
@@ -57,9 +82,17 @@ public class usageGraph extends AppCompatActivity {
         }
 
 
-        XAxis xAxis = horChart.getXAxis();
+        XAxis xAxis = barChart.getXAxis();
         xAxis.setGranularity(1f);
         xAxis.setValueFormatter(new MyAxisValueFormatter(values));
+        YAxis yaxis = barChart.getAxisLeft();
+
+        LimitLine limitline = new LimitLine(20f, "Daily Goal");
+        limitline.setLineColor(Color.RED);
+        limitline.setTextSize(12f);
+        limitline.setLineWidth(4f);
+
+        yaxis.addLimitLine(limitline);
 
 
 
@@ -78,13 +111,17 @@ public class usageGraph extends AppCompatActivity {
             barChart.notifyDataSetChanged();
             barChart.invalidate();
             */
-        horChart.setData(data);
-        horChart.setDrawGridBackground(true);
-        horChart.setFitBars(true);
-        horChart.invalidate();
+        barChart.setData(data);
+        barChart.setDrawGridBackground(true);
+        barChart.setFitBars(true);
+        barChart.invalidate();
 
         // barChart.invalidate(); // refresh
     }
+
+
+
+
 }
 
 
