@@ -40,6 +40,17 @@ RUN cd apache-couchdb-* \
  &&  ./configure --prefix=/usr/local --with-js-lib=/usr/lib --with-js-include=/usr/include/mozjs --enable-init \
  && make && make install
 
+<<<<<<< HEAD
+# Finally, install flask.
+
+RUN pip install \
+  flask \
+  couchdb
+
+VOLUME /var/flask
+
+COPY ./start.sh /
+=======
 # Finally, install python stuff.
 
 RUN pip install --upgrade pip && pip install \
@@ -50,6 +61,7 @@ RUN pip install --upgrade pip && pip install \
 VOLUME /var/flask
 
 COPY docker_setup/start.sh /
+>>>>>>> dd4129b88d5a096b478020d24c572470740a2b7a
 
 WORKDIR /var/flask
 
