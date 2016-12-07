@@ -33,7 +33,7 @@ public class Send extends IntentService {
         if (intent != null) {
             System.out.println("Test");
 
-            sendData();
+            //sendData();
             getData();
 
 
@@ -56,7 +56,7 @@ public class Send extends IntentService {
             out.close();
 
             //out = new BufferedOutputStream(urlConnection.getOutputStream());
-            //out.write(application.getBytes("UTF-8"));
+            //out.write(application.getBytes("UTF-8"));d
 
             int responseCode = urlConnection.getResponseCode();
             System.out.println("HTTP Response Code: " + responseCode + " | " + urlConnection.getResponseMessage());
@@ -78,7 +78,7 @@ public class Send extends IntentService {
             StringBuilder sb = null;
             String line = null;
 
-            String serverAddr = "http://ec2-35-160-174-113.us-west-2.compute.amazonaws.com:5000/get/Yogitha/";
+            String serverAddr = "http://ec2-35-160-174-113.us-west-2.compute.amazonaws.com:5000/dgraph/Joby/";
             URL url = new URL(serverAddr);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
@@ -94,15 +94,16 @@ public class Send extends IntentService {
             }
 
             String apps = sb.toString();
+            System.out.println(apps);
             JSONObject jsonObject = null;
-            try {
+            /*try {
                 jsonObject = new JSONObject(apps);
                 System.out.println(jsonObject.getString("Appdata"));
 
             }
             catch (JSONException js){
                 System.out.println("Fuck");
-            }
+            }*/
 
             int responseCode = urlConnection.getResponseCode();
             System.out.println("HTTP Response Code: " + responseCode + " | " + urlConnection.getResponseMessage());
@@ -112,7 +113,7 @@ public class Send extends IntentService {
         } catch (MalformedURLException badurl) {
             System.out.println("Bad URL");
         } catch (IOException io) {
-            System.out.println("Not sending");
+            System.out.println("Not Receiving");
 
         }
     }

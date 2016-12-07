@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         for(ApplicationInfo packageinfo : packages) {
             if ((packageinfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
-                System.out.println(packageinfo);
+                System.out.println(pm.getApplicationLabel(packageinfo));
                 image = (ImageView) findViewById(R.id.imageView);
                 image.setImageDrawable(pm.getApplicationLogo(packageinfo));
 

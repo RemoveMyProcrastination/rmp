@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_settings"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.luisrodriguez.focusing.Settings"
+    tools:showIn="@layout/app_bar_settings">
+
+    <TextView
+        android:text="@string/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"
+        android:id="@+id/textView2" />
+
+    <Switch
+        android:text="Facebook"
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:id="@+id/switch3"
+        android:layout_below="@+id/textView2" />
+
+    <Switch
+        android:text="Snapchat"
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:id="@+id/switch4"
+        android:layout_below="@+id/textView2" />
+
+    <Switch
+        android:text="Instagram"
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:id="@+id/switch5"
+        android:layout_below="@+id/textView2" />
+
+    <Switch
+        android:text="Photos"
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:id="@+id/switch6"
+        android:layout_below="@+id/textView2" />
+
+    <Switch
+        android:text="Music"
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:id="@+id/switch7"
+        android:layout_below="@+id/textView2" />
+
+    <Switch
+        android:text="News"
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:id="@+id/switch8"
+        android:layout_below="@+id/textView2" />
+
+    <Switch
+        android:text="Photos"
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:id="@+id/switch9"
+        android:layout_below="@+id/textView2" />
+
+    <Button
+        android:text="Set Daily Goals"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/roundbutton"
+        android:layout_below="@+id/switch9"
+        android:layout_marginTop="60dp"
+        android:id="@+id/button1"
+        android:onClick="GoDaily" />
+
+    <Button
+        android:text="Set Weekely Goals"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/roundbutton"
+        android:layout_below="@+id/switch9"
+        android:layout_marginTop="120dp"
+        android:id="@+id/button2"
+        android:onClick="GoWeekly" />
+
+    <TextView
+        android:text="Aplications you wish to monitor:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/textView9" />
+
+</RelativeLayout>

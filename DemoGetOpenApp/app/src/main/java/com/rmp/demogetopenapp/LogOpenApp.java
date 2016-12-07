@@ -7,11 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
+
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -64,10 +64,6 @@ public class LogOpenApp extends IntentService {
             List<UsageStats> usageStatsList = usm.queryUsageStats(UsageStatsManager.INTERVAL_BEST,startTime,endTime);
 
 
-            System.out.println(Build.MODEL);
-
-
-
             for (UsageStats u : usageStatsList){
                 //If app was used
                 if(u.getTotalTimeInForeground() != 0) {
@@ -86,18 +82,19 @@ public class LogOpenApp extends IntentService {
                         ApplicationInfo ai = pm.getApplicationInfo(u.getPackageName(), 0);
                         if ((ai.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
                             try{
+                                String appname = pm.getApplicationLabel(ai).toString();
                                 //Format into JSON
                                 JSONObject application = new JSONObject();
                                 JSONArray time = new JSONArray();
                                 //time.put(hour);
                                 time.put(min);
                                 //time.put(sec);
-                                application.put(tst, time);
+                                application.put(appname, time);
                                 String newapp = application.toString();
                                 newapp = newapp.replace("[","");
                                 newapp = newapp.replace("]","");
-                                //sendData(newapp);
-                                //System.out.println(newapp);
+                                sendData(newapp);
+                                System.out.println(newapp);
                             } catch(JSONException e){
                                 e.printStackTrace();
                             }
@@ -115,6 +112,7 @@ public class LogOpenApp extends IntentService {
         }
         getData();
     }
+
 
     protected void sendData(String application){
         try {
@@ -150,15 +148,16 @@ public class LogOpenApp extends IntentService {
 
     public void getData() {
         try {
+
             //Connect to URL
             HttpURLConnection urlConnection;
-            String serverAddr = "http://ec2-35-160-174-113.us-west-2.compute.amazonaws.com:5000/get/Joby/";
+            String serverAddr = "http://ec2-35-160-174-113.us-west-2.compute.amazonaws.com:5000/wgraph/Joby/";
             URL url = new URL(serverAddr);
             urlConnection = (HttpURLConnection) url.openConnection();
 
             //Format for json and set method to GET
             urlConnection.setRequestMethod("GET");
-            urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8\"");
+            //urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8\"");
 
             BufferedReader rd;
             StringBuilder sb;
@@ -173,35 +172,52 @@ public class LogOpenApp extends IntentService {
             }
 
             String apps = sb.toString();
-            System.out.println(apps);
             JSONObject jsonObject;
             JSONObject jsonObject1;
+            JSONArray jsonArray;
 
             int i = 0;
 
             //Put into JSON format
             try {
+
                 //Get Appdate from entire object
-                jsonObject = new JSONObject(apps).getJSONObject("Appdata");
+                jsonObject = new JSONObject(apps);
+                jsonArray = jsonObject.getJSONArray("days");
+
                 //Array of applications
-                String[] applications = new String[jsonObject.length()];
+                String[] applications = new String[jsonArray.length()];
+
                 //Array of minutes
-                float[] minutes = new float[jsonObject.length()];
+                float[] minutes = new float[jsonArray.length()];
+                System.out.println(jsonObject);
+
+
+                System.out.println(jsonArray);
 
                 //iterate though Appdata keys, getting total
-                for(Iterator<String> iter = jsonObject.keys(); iter.hasNext();) {
-                    String key = iter.next();
-                    applications[i]= key;
-                    jsonObject1 = jsonObject.getJSONObject(key);
-                    float min = jsonObject1.getInt("Tot");
-                    minutes[i] = min;
-                    i++;
+                for(int count = 0; count < jsonArray.length(); count++) {
+
+                    jsonObject1 = jsonArray.getJSONObject(count);
+                    for(Iterator<String> iter = jsonObject1.keys();iter.hasNext();) {
+                        String key = iter.next();
+                        float min = jsonObject1.getInt(key);
+                        applications[i]= key;
+                        minutes[i] = min;
+                        i++;
+
+                    }
+
+
 
                 }
+
+
                 for(int j = 0; j < i; j++) {
                     System.out.println(applications[j]);
                     System.out.println(minutes[j]);
                 }
+
 
 
             }
@@ -218,7 +234,7 @@ public class LogOpenApp extends IntentService {
         } catch (MalformedURLException badurl) {
             System.out.println("Bad URL");
         } catch (IOException io) {
-            System.out.println("Not sending");
+            System.out.println("Not Receiving");
 
         }
     }
