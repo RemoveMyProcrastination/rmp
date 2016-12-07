@@ -13,12 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 
 public class SettingActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    EditText mTextDaily,mTextWeekly;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +23,6 @@ public class SettingActivity extends AppCompatActivity
         setContentView(R.layout.activity_setting);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        mTextDaily = (EditText) findViewById(R.id.mTextDaily);
-        mTextWeekly = (EditText) findViewById(R.id.mTextWeekly);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -90,7 +84,7 @@ public class SettingActivity extends AppCompatActivity
             Intent intent = new Intent(SettingActivity.this, AboutActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_help) {
+        } else if (id == R.id.nav_home) {
             Intent intent = new Intent(SettingActivity.this, HelpActivity.class);
             startActivity(intent);
 
@@ -98,8 +92,8 @@ public class SettingActivity extends AppCompatActivity
             Intent intent = new Intent(SettingActivity.this, SettingActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_power) {
-            Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
+        } else if (id == R.id.nav_help) {
+            Intent intent = new Intent(SettingActivity.this, HelpActivity.class);
             startActivity(intent);
 
         }

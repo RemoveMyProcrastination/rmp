@@ -84,18 +84,17 @@ public class HelpActivity extends AppCompatActivity
             Intent intent = new Intent(HelpActivity.this, AboutActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_help) {
-            Intent intent = new Intent(HelpActivity.this, HelpActivity.class);
+        } else if (id == R.id.nav_home) {
+            Intent intent = new Intent(HelpActivity.this, HomePage.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_manage) {
             Intent intent = new Intent(HelpActivity.this, SettingActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_power) {
-            Intent intent = new Intent(HelpActivity.this, LoginActivity.class);
+        } else if (id == R.id.nav_help) {
+            Intent intent = new Intent(HelpActivity.this, HelpActivity.class);
             startActivity(intent);
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
