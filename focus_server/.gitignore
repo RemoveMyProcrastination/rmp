@@ -1,2 +1,26 @@
 couchdb.stdout
 couchdb.stderr
+<<<<<<< HEAD
+=======
+
+.DS_Store
+*.pyc
+*.pyo
+env
+env*
+dist
+build
+*.egg
+*.egg-info
+_mailinglist
+.tox
+.cache/
+.idea/
+
+# Coverage reports
+htmlcov
+.coverage
+.coverage.*
+*,cover
+
+>>>>>>> dd4129b88d5a096b478020d24c572470740a2b7a
