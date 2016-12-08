@@ -113,4 +113,5 @@
     <string name="title_activity_setting">Setting</string>
     <string name="title_activity_help">Help</string>
     <string name="title_activity_home">Home</string>
+    <string name="intro_quote">"More time, more productivity"</string>
 </resources>
