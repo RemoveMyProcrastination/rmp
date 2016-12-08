@@ -15,11 +15,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import static android.R.id.button2;
+
 
 public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Button button;
+    Button button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,5 +124,17 @@ public class HomePage extends AppCompatActivity
                 startActivity(intent);
             }
         });
+        final Context newContext = this;
+        button2 = (Button) findViewById(R.id.bDaily);
+        button2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntent = new Intent(newContext, dailyGraph.class);
+                startActivity(newIntent);
+            }
+        });
+
+
     }
+
 }

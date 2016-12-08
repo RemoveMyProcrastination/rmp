@@ -22,7 +22,42 @@
         android:textSize="@dimen/activity_horizontal_margin"
         android:gravity="center"
         android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="116dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="120dp" />
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Adam Tammariello -Database/UI               Byron Becker - Database
+Joby Jennings - Usage Data
+Akash Goakanar - Usage Data/Authentication
+Luis Rodriguez - UX/UI
+Nurin Shakmad - UK/UI"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:layout_width="1000dp"
+        android:layout_height="200dp"
+        android:id="@+id/aboutUshere"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="1000dp"
+        android:layout_height="100dp"
+        android:text="Our goal was to help every user manage the time that is important to them.
+
+        we hope you enjoy our product, and find it as useful as we do.
+        -RMP Team"
+        android:id="@+id/missionView"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:gravity="left"
+        android:textColor="@color/colorPrimaryDark"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/aboutUshere" />
 
 </RelativeLayout>

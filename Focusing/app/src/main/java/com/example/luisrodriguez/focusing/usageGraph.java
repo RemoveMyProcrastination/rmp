@@ -1,4 +1,4 @@
-package com.example.syukrina.focus;
+package com.example.luisrodriguez.focusing;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,15 +15,13 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
 /**
- * Created by SYUKRINA on 12/5/2016.
+ * Created by adam on 12/8/2016.
  */
-
 
 
 public class usageGraph extends AppCompatActivity {
@@ -31,13 +29,13 @@ public class usageGraph extends AppCompatActivity {
     BarChart barChart;
 
     String[] values = new String[20];
-    Button button;
+    Button newButt;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_home_page);
+        setContentView(R.layout.activity_weekly_graph);
         addListenerOnButton();
 
         barChart = (BarChart) findViewById(R.id.testGraph);
@@ -46,12 +44,19 @@ public class usageGraph extends AppCompatActivity {
 
 
         ArrayList<entry> dailyData = new ArrayList<>();
-        entry n1 = new entry("M", 20);
+        entry n1 = new entry("M", 175);
         dailyData.add(n1);
-        entry e1 = new entry("T", 30);
+        entry e1 = new entry("T", 90);
         dailyData.add(e1);
-        entry e2 = new entry("W", 40);
+        entry e2 = new entry("W", 100);
         dailyData.add(e2);
+        entry e3 = new entry("Th", 120);
+        dailyData.add(e3);
+        entry e4 = new entry("F", 125);
+        dailyData.add(e4);
+        entry e5 = new entry("S", 110);
+        dailyData.add(e5);
+        entry e6 = new entry("Su", 200);
 
 
         for (int i = 0; i < dailyData.size(); i++) {
@@ -65,14 +70,14 @@ public class usageGraph extends AppCompatActivity {
 
 
         XAxis xAxis = barChart.getXAxis();
-        xAxis.setGranularity(1f);
+        xAxis.setGranularity(.5f);
         xAxis.setValueFormatter(new MyAxisValueFormatter(values));
         YAxis yAxis = barChart.getAxisLeft();
 
-        LimitLine limitLine = new LimitLine(30,"Procrastination Limit");
+        LimitLine limitLine = new LimitLine(120,"Procrastination Limit");
         limitLine.setLineColor(Color.RED);
         limitLine.setLineWidth(2f);
-        limitLine.setTextSize(2f);
+        limitLine.setTextSize(4f);
         yAxis.addLimitLine(limitLine);
 
 
@@ -105,18 +110,14 @@ public class usageGraph extends AppCompatActivity {
 
     protected void addListenerOnButton(){
         final Context context = this;
-        button = (Button) findViewById(R.id.bDaily);
+        newButt = (Button) findViewById(R.id.button3);
 
-        button.setOnClickListener(new View.OnClickListener(){
+        newButt.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Intent intent = new Intent(context, dailyGraph.class);
                 startActivity(intent);
             }
         });
 
-        }
     }
-
-
-
-
+}

@@ -22,5 +22,18 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_faces"
         app:menu="@menu/activity_home_page_drawer" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:inputType="number"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/textView7"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_marginLeft="52dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginBottom="14dp"
+        android:layout_alignRight="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView" />
 
 </android.support.v4.widget.DrawerLayout>

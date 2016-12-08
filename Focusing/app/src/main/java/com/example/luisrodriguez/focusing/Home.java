@@ -1,5 +1,6 @@
 package com.example.luisrodriguez.focusing;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,9 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    Button butt1;
+    Button butt2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        addListenerOnButton();
     }
 
     @Override
@@ -98,6 +103,30 @@ public class Home extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    public void addListenerOnButton() {
+        final Context context = this;
+
+        butt1 = (Button) findViewById(R.id.button3);
+
+        butt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, usageGraph.class);
+                startActivity(intent);
+            }
+        });
+        final Context newContext = this;
+        butt2 = (Button) findViewById(R.id.button4);
+        butt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntent = new Intent(newContext, dailyGraph.class);
+                startActivity(newIntent);
+            }
+        });
+
+
+    }
 
     public class ScrollingActivity extends AppCompatActivity {
 
@@ -109,5 +138,6 @@ public class Home extends AppCompatActivity
             setSupportActionBar(toolbar);
         }
     }
+
 
 }

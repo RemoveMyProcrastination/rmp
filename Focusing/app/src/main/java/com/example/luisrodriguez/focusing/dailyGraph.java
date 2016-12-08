@@ -1,4 +1,4 @@
-package com.example.syukrina.focus;
+package com.example.luisrodriguez.focusing;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,43 +15,43 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
 /**
- * Created by SYUKRINA on 12/5/2016.
+ * Created by adam on 12/8/2016.
  */
 
+public class dailyGraph extends AppCompatActivity {
 
-
-public class usageGraph extends AppCompatActivity {
-
-    BarChart barChart;
+    BarChart newChart;
 
     String[] values = new String[20];
-    Button button;
+    Button butt6;
+    LimitLine limitLine;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_home_page);
+        setContentView(R.layout.activity_daily_graph);
         addListenerOnButton();
-
-        barChart = (BarChart) findViewById(R.id.testGraph);
+        newChart = (BarChart) findViewById(R.id.newGraph);
 
         ArrayList<BarEntry> barEntries = new ArrayList<>();
 
 
         ArrayList<entry> dailyData = new ArrayList<>();
-        entry n1 = new entry("M", 20);
+        entry n1 = new entry("Netflix", 20);
         dailyData.add(n1);
-        entry e1 = new entry("T", 30);
+        entry e1 = new entry("YouTube", 50);
         dailyData.add(e1);
-        entry e2 = new entry("W", 40);
+        entry e2 = new entry("Facebook", 40);
         dailyData.add(e2);
+        entry e3 = new entry("Snapchat", 25);
+        dailyData.add(e3);
+        entry e4 = new entry("Instagram", 40);
 
 
         for (int i = 0; i < dailyData.size(); i++) {
@@ -60,26 +60,24 @@ public class usageGraph extends AppCompatActivity {
             values[i] = appName;
 
 
-            barEntries.add(new BarEntry(i,value));
+            barEntries.add(new BarEntry(i, value));
         }
 
 
-        XAxis xAxis = barChart.getXAxis();
+        XAxis xAxis = newChart.getXAxis();
         xAxis.setGranularity(1f);
         xAxis.setValueFormatter(new MyAxisValueFormatter(values));
-        YAxis yAxis = barChart.getAxisLeft();
 
-        LimitLine limitLine = new LimitLine(30,"Procrastination Limit");
+        YAxis yAxis = newChart.getAxisLeft();
+
+        LimitLine limitLine = new LimitLine(30, "Procrastination Limit");
         limitLine.setLineColor(Color.RED);
         limitLine.setLineWidth(2f);
-        limitLine.setTextSize(2f);
+        limitLine.setTextSize(4f);
         yAxis.addLimitLine(limitLine);
 
 
-
-
-
-        BarDataSet set = new BarDataSet(barEntries, "WeeklyUsage");
+        BarDataSet set = new BarDataSet(barEntries, "Daily Usage(minutes)");
 
 
         set.setColors(ColorTemplate.VORDIPLOM_COLORS);
@@ -93,30 +91,25 @@ public class usageGraph extends AppCompatActivity {
             barChart.notifyDataSetChanged();
             barChart.invalidate();
             */
-        barChart.setData(data);
-        barChart.setDrawGridBackground(true);
-        barChart.setFitBars(true);
-        barChart.invalidate();
-        barChart.setNoDataText("");
+        newChart.setData(data);
+        newChart.setDrawGridBackground(true);
+        newChart.setFitBars(true);
+        newChart.invalidate();
+        newChart.setNoDataText("");
 
 
         // barChart.invalidate(); // refresh
     }
 
-    protected void addListenerOnButton(){
+    protected void addListenerOnButton() {
         final Context context = this;
-        button = (Button) findViewById(R.id.bDaily);
+        butt6 = (Button) findViewById(R.id.button4);
 
-        button.setOnClickListener(new View.OnClickListener(){
+        butt6.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(context, dailyGraph.class);
+                Intent intent = new Intent(context, usageGraph.class);
                 startActivity(intent);
             }
         });
-
-        }
     }
-
-
-
-
+}
