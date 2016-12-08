@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_setting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/app_name"
+    tools:context="com.example.syukrina.focus.AboutActivity"
+    tools:showIn="@layout/app_bar_about">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_activity_about"
+        android:id="@+id/textView"
+        android:textStyle="bold"
+        android:textSize="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="116dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Adam Tammariello -Database/UI               Byron Becker - Database
+Joby Jennings - Usage Data
+Akash Goakanar - Usage Data/Authentication
+Luis Rodriguez - UX/UI
+Nurin Shakmad - UK/UI"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:layout_width="1000dp"
+        android:layout_height="200dp"
+        android:id="@+id/aboutUshere"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="1000dp"
+        android:layout_height="100dp"
+        android:text="Our goal was to help every user manage the time that is important to them.
+
+        we hope you enjoy our product, and find it as useful as we do.
+        -RMP Team"
+        android:id="@+id/missionView"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:gravity="left"
+        android:textColor="@color/colorPrimaryDark"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/aboutUshere" />
+
+</RelativeLayout>
