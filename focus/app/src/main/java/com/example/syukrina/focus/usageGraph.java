@@ -54,7 +54,7 @@ public class usageGraph extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_usage_graph);
+        setContentView(R.layout.content_home_page);
 
         barChart = (BarChart) findViewById(R.id.testGraph);
         //ArrayList<entry>dailyData = weeklyData();
